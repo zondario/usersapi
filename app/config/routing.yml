@@ -1,0 +1,3 @@
+zondario_users:
+    resource: "@ZondarioUsersBundle/Resources/config/routing.yml"
+    prefix:   /

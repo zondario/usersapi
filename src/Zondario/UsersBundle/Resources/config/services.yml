@@ -1,0 +1,4 @@
+services:
+#    zondario_users.example:
+#        class: Zondario\UsersBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
