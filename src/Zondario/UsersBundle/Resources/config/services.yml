@@ -1,4 +1,18 @@
 services:
-#    zondario_users.example:
-#        class: Zondario\UsersBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+  Zondario\UsersBundle\:
+    resource: '%kernel.root_dir%/../src/Zondario/UsersBundle/*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway
+    exclude: '%kernel.root_dir%/../src/Zondario/UsersBundle/{Entity}'
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  Zondario\UsersBundle\Repository\UserRepository:
+      factory: ['Zondario\CoreBundle\Factory\EntityRepositoryFactory', getEntityRepository]
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - "ZondarioUsersBundle:User"
+
+

@@ -1,0 +1,10 @@
+services:
+
+  Zondario\CoreBundle\:
+    resource: '%kernel.root_dir%/../src/Zondario/CoreBundle/*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway
+    exclude: '%kernel.root_dir%/../src/Zondario/CoreBundle/{Entity}'
+    public: false
+    autowire: true
+    autoconfigure: true
