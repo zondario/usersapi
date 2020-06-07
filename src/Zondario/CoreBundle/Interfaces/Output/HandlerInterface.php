@@ -12,4 +12,6 @@ namespace Zondario\CoreBundle\Interfaces\Output;
 interface HandlerInterface
 {
     public function createResponse($model, $serializerContext);
+
+    public function validateOutputMediaType();
 }

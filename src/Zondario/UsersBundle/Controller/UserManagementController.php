@@ -51,6 +51,7 @@ class UserManagementController extends Controller
      */
     public function listUsers()
     {
+        $this->outputHandler->validateOutputMediaType();
         $users = $this->userManager->getAllUsers();
         $model = new ListUsers();
         $model->setUsers($users);
@@ -62,6 +63,7 @@ class UserManagementController extends Controller
      */
     public function createUser()
     {
+        $this->outputHandler->validateOutputMediaType();
         $user = $this->userBuilder->createFromPost();
         try {
             $this->userManager->createUser($user);
@@ -78,6 +80,7 @@ class UserManagementController extends Controller
      */
     public function deleteUser(int $id)
     {
+        $this->outputHandler->validateOutputMediaType();
         $success = $this->userManager->deleteUserById($id);
         $model = new DeleteUser();
         $model->setSuccess($success);
@@ -89,6 +92,7 @@ class UserManagementController extends Controller
      */
     public function editUser(int $id )
     {
+        $this->outputHandler->validateOutputMediaType();
         $body = $this->getRequestContentAsArray();
         $user = $this->userManager->getUser(['id' => $id]);
         if (!$user) {

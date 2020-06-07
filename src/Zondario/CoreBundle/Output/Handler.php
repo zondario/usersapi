@@ -12,6 +12,7 @@ use Zondario\CoreBundle\Interfaces\Output\HandlerInterface;
 
 class Handler implements HandlerInterface
 {
+    private $outputContentType;
     /**
      * @var RequestStack
      */
@@ -34,11 +35,17 @@ class Handler implements HandlerInterface
         $context = SerializationContext::create()->setGroups(
             is_array($serializerContext ) ? $serializerContext : [$serializerContext]
         );
-        $contentType = $this->decideOutputContentType();
-        if (!$contentType) {
+        $contentType = $this->outputContentType;
+        return new Response($serializer->serialize($model, $contentType, $serializerContext ? $context : null));
+    }
+
+    public function validateOutputMediaType()
+    {
+        $outputContentType = $this->decideOutputContentType();
+        if (!$outputContentType) {
             throw new NotAcceptableHttpException();
         }
-        return new Response($serializer->serialize($model, $contentType, $serializerContext ? $context : null));
+        $this->outputContentType = $outputContentType;
     }
 
     private function decideOutputContentType()
